@@ -1,0 +1,16 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    {% if posts %}
+        {% for post in posts %}
+            <div class = "content">
+            {{category.title}} -> <a href="{{post.get_absolute_url}}">{{post.title}}</a>
+            <br>{{post.posted}}
+            <br>{{post.body}}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>There are no posts.</p>
+    {% endif %}
+
+{% endblock %}

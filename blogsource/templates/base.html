@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="MSSmartTagsPreventParsing" content="TRUE"/>
+<meta http-equiv="expires" content="-1"/>
+<meta http-equiv= "pragma" content="no-cache"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="description" content="about"/>
+<link rel="stylesheet" type="text/css" href="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/css/blog_style.css"/>
+<link rel="stylesheet" type="text/css" href="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/css/scrollable-horizontal.css"/>
+<link rel="stylesheet "type="text/css "href="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/css/scrollable-buttons.css"/>
+<script type="text/javascript" src="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/js/jquery.tools.min.js"></script>
+<script type="text/javascript" src="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/js/gallery.js"></script>
+        <title>{% block head_title %}{% endblock %}</title>
+</head>
+
+<body style="background-image: url(back.jpg); background-repeat: ; background-color: #ffffff; ">
+{% block title %}<center><h1>Through the Lens</h1></center>{% endblock %}
+<div id = "container">
+    <div id = "sidebar">
+    <h1>Categories</h1>
+        {% if categories %}            
+            <ul id = "sidebarnav">
+            {% for category in categories %}
+                <li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
+            {% endfor %}
+            </ul>        
+        {% else %}
+            <p>There are no posts.</p>
+        {% endif %}
+    </div>
+
+{% block content %}
+
+{% endblock %}
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class = "content"> 
+<h1>{{post.title}}</h1>
+{{post.posted}}<br>
+{{post.body}}
+
+<!-- Comments  -->
+{% if comments %}
+    <p>Comments:</p>
+{% endif %}
+
+{% for comment in comments %}
+    <div class="comment">
+        <div class="time"><h2>{{ comment.created }} | {{ comment.author }}</h2></div>
+        <div class="body"><h2>{{ comment.body|linebreaks }}</h2></div>
+    </div>
+{% endfor %}
+
+<div id="addc">Add a comment</div>
+<!-- Comment form  -->
+<form action="{% url blogsource.views.add_comment slug=post.slug %}" method="POST">{% csrf_token %}
+    <div id="cform">
+        Name: {{ form.author }}
+        <p>{{ form.body|linebreaks }}</p>
+    </div>
+    <div id="submit"><input type="submit" value="Submit"></div>
+</form>
+</div>
+</div>
+{% endblock %}
