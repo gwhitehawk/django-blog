@@ -20,10 +20,9 @@
 
 <div id="addc">Add a comment</div>
 <!-- Comment form  -->
-<form action="{% url blogsource.views.add_comment slug=post.slug %}" method="POST">{% csrf_token %}
+<form action="{% url blogsource.views.view_post slug=post.slug %}" method="POST">{% csrf_token %}
     <div id="cform">
-        Name: {{ form.author }}
-        <p>{{ form.body|linebreaks }}</p>
+        {{ form.as_p }}
     </div>
     <div id="submit"><input type="submit" value="Submit"></div>
 </form>

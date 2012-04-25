@@ -1,4 +1,5 @@
 # Django settings for blog project.
+from django.conf import settings
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -154,3 +155,9 @@ LOGGING = {
         },
     }
 }
+
+# math captcha settings
+NUMBERS = getattr(settings, 'MATH_CAPTCHA_NUMBERS', range(1,6))
+OPERATORS = getattr(settings, 'MATH_CAPTCHA_OPERATORS', '-+')
+QUESTION = getattr(settings, 'MATH_CAPTCHA_QUESTION', 'Are you human? ')
+

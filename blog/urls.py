@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^blogsource/category/(?P<slug>[^\.]+).html', 
         'blogsource.views.view_category', 
         name='view_blog_category'),
-    (r"^add_comment/(?P<slug>[^\.]+)/$", "blogsource.views.add_comment"),
+#    (r"^add_comment/(?P<slug>[^\.]+)/$", "blogsource.views.add_comment"),
     # Examples:
     # url(r'^$', 'blog.views.home', name='home'),
     # url(r'^blog/', include('blog.foo.urls')),
