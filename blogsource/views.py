@@ -1,10 +1,9 @@
 # Create your views here.
 
 from blogsource.models import Blog, Category, Comment
-from blog.forms import MathCaptchaModelForm
+from math_captcha.forms import MathCaptchaModelForm
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
-#from django.forms import ModelForm
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 
@@ -31,7 +30,6 @@ def view_post(request, slug):
     if request.method == "POST":
         p = request.POST
         comment = Comment(post=get_object_or_404(Blog, slug=slug))
-        #comment = Comment(post)
         cf = CommentForm(p, instance=comment)
 
         if cf.is_valid():
@@ -58,16 +56,3 @@ def view_category(request, slug):
         'category': category,
         'posts': Blog.objects.filter(category=category)[:5]
     })
-
-#def add_comment(request, slug):
-#    p = request.POST
-#    comment = Comment(post=get_object_or_404(Blog, slug=slug))
-#    cf = CommentForm(p, instance=comment)
-
-#    if cf.is_valid():
-#        comment.author = p["author"]
-#        comment.body = p["body"]
-#        comment.save()
-#    else:
-#        cf = CommentForm()
-#    return HttpResponseRedirect(reverse("blogsource.views.view_post", kwargs={'slug': slug}))    
