@@ -1,9 +1,16 @@
 from django.contrib import admin
-from blogsource.models import Blog, Category, Comment
+from blogsource.models import Blog, Category, Comment, Image, Link
+
+class InlineImage(admin.TabularInline):
+    model = Image
+
+class InlineLink(admin.TabularInline):
+    model = Link
 
 class BlogAdmin(admin.ModelAdmin):
     # exclude = ['posted']
     prepopulated_fields = {'slug': ('title',)}
+    inlines = [InlineImage, InlineLink]
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}

@@ -34,4 +34,15 @@ class Comment(models.Model):
     post = models.ForeignKey(Blog)
 
     def __unicode__(self):
-        return unicode("%s: %s" % (self.post, self.body[:60]))            
+        return unicode("%s: %s" % (self.post, self.body[:60])) 
+
+class Image(models.Model):
+    post = models.ForeignKey(Blog)
+    image = models.ImageField(upload_to='img', max_length=500)
+
+class Link(models.Model):
+    post = models.ForeignKey(Blog)
+    link = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return unicode("%s: %s" % (self.post, self.link[:100]))

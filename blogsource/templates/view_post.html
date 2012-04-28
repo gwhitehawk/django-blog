@@ -5,6 +5,12 @@
 <h1>{{post.title}}</h1>
 {{post.posted}}<br>
 {{post.body}}
+{% for link in links %}
+    <br>
+    <div id="image_wrap">
+    <img src="{{link.link}}" height="532" />
+    </div>
+{% endfor %}
 
 <!-- Comments  -->
 {% if comments %}
@@ -26,6 +32,5 @@
     </div>
     <div id="submit"><input type="submit" value="Submit"></div>
 </form>
-</div>
 </div>
 {% endblock %}

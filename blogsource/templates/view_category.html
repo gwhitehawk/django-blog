@@ -1,4 +1,5 @@
 {% extends 'base.html' %} 
+{% load photoblog_extras %}
 
 {% block content %}
     {% if posts %}
@@ -7,6 +8,13 @@
             {{category.title}} -> <a href="{{post.get_absolute_url}}">{{post.title}}</a>
             <br>{{post.posted}}
             <br>{{post.body}}
+            {% for link in links|filterlinks:post %}
+                <br>
+                <div id="image_wrap">
+                <img src="{{link.link}}" height="532" />
+                </div>
+            {% endfor %}
+
             </div>
         {% endfor %}
     {% else %}
