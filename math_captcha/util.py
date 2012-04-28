@@ -2,16 +2,18 @@ from django.utils.hashcompat import sha_constructor
 from django.conf import settings as djsettings
 from random import choice
 from binascii import hexlify, unhexlify
-import blog.settings
+
+numbers = range(1,6)
+operators = '-+'
 
 def question():
-    n1, n2 = choice(blog.settings.NUMBERS), choice(blog.settings.NUMBERS)
+    n1, n2 = choice(numbers), choice(numbers)
 
     if n2 > n1:
         # avoid negative answers
         n1, n2 = n2, n1
 
-    return "%s %s %s" % (n1, choice(blog.settings.OPERATORS), n2)
+    return "%s %s %s" % (n1, choice(operators), n2)
     
 def encode(question):
     """

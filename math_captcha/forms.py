@@ -1,7 +1,8 @@
 from django import forms
 from math_captcha.fields import MathField
 from math_captcha.util import encode, decode
-import blog.settings
+
+mathquestion = 'Answer the question '
 
 class NullWidget(forms.widgets.HiddenInput):
     def render(self, *a, **kw):
@@ -44,7 +45,7 @@ class MathCaptchaModelForm(forms.ModelForm):
                 model = MyModel
             
     """
-    math_captcha_field = MathField(label=blog.settings.QUESTION)
+    math_captcha_field = MathField(label=mathquestion)
     math_captcha_question = forms.fields.CharField(widget=NullWidget())
 
     def clean(self):
@@ -62,7 +63,7 @@ class MathCaptchaForm(forms.Form):
             # ...
             
     """
-    math_captcha_field = MathField(label=blog.settings.QUESTION)
+    math_captcha_field = MathField(label=mathquestion)
     math_captcha_question = forms.fields.CharField(widget=NullWidget())
 
     def clean(self):
