@@ -13,12 +13,12 @@ class CommentForm(MathCaptchaModelForm):
         exclude = ["post"]
 
 def base(request):
-    return render_to_response('base.html', {
+    return render_to_response('blogsource/base.html', {
         'categories': Category.objects.all()
     })
         
 def index(request):
-	return render_to_response('index.html', {
+	return render_to_response('blogsource/index.html', {
         'categories': Category.objects.all(),
         'posts': Blog.objects.all()[:5],
         'links': Link.objects.all()
@@ -49,12 +49,12 @@ def view_post(request, slug):
     }
     
     d.update(csrf(request))
-    return render_to_response('view_post.html', d) 
+    return render_to_response('blogsource/view_post.html', d) 
 
 def view_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts = Blog.objects.filter(category=category)
-    return render_to_response('view_category.html', {
+    return render_to_response('blogsource/view_category.html', {
         'categories': Category.objects.all(),
         'category': category,
         'posts': posts[:5],
