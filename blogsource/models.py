@@ -14,7 +14,7 @@ class Blog(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('view_blog_post', None, { 'slug': self.slug })
+        return ('blogsource.views.view_post', None, { 'slug': self.slug })
 
 class Category(models.Model):
     title = models.CharField(max_length=100, db_index=True)
@@ -25,7 +25,7 @@ class Category(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('view_blog_category', None, { 'slug': self.slug })
+        return ('blogsource.views.view_category', None, { 'slug': self.slug })
 
 class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
