@@ -6,11 +6,23 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 class CommentForm(MathCaptchaModelForm):
     class Meta:
         model = Comment
         exclude = ["post"]
+
+def paginate(request, posts):
+    paginator = Paginator(posts, 1)
+    try: page = int(request.GET.get("page", '1'))
+    except ValueError: page = 1
+    try:
+        posts_filtered = paginator.page(page)
+    except (InvalidPage, EmptyPage):
+        posts_filtered = paginator.page(paginator.num_pages)
+    
+    return posts_filtered
 
 def base(request):
     return render_to_response('blogsource/base.html', {
@@ -18,9 +30,11 @@ def base(request):
     })
         
 def index(request):
-	return render_to_response('blogsource/index.html', {
+    posts = Blog.objects.all().order_by("-posted")
+
+    return render_to_response('blogsource/index.html', {
         'categories': Category.objects.all(),
-        'posts': Blog.objects.all()[:5],
+        'posts': paginate(request, posts),
         'links': Link.objects.all()
     })
 
@@ -53,10 +67,11 @@ def view_post(request, slug):
 
 def view_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    posts = Blog.objects.filter(category=category)
+    posts = Blog.objects.filter(category=category).order_by("-posted")
+    
     return render_to_response('blogsource/view_category.html', {
         'categories': Category.objects.all(),
         'category': category,
-        'posts': posts[:5],
+        'posts': paginate(request, posts),
         'links': Link.objects.filter(post=posts)
     })

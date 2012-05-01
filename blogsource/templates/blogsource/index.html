@@ -16,8 +16,26 @@
             {% endfor %}
 		    </div>
         {% endfor %}
+
+    <!-- Next/Prev page links  -->
+        {% if posts.paginator.num_pages > 1 %}    
+        <div class="pagination">
+            <span class="step-links">
+                {% if posts.has_previous %}
+                <a href= "?page={{ posts.previous_page_number }}">newer entries &lt;&lt; </a>            
+                {% endif %}
+
+                <span class="current">
+                    &nbsp;Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+                </span>     
+            
+                {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}"> &gt;&gt; older entries</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
     {% else %}
         <p>There are no posts.</p>
     {% endif %}
-
 {% endblock %}
