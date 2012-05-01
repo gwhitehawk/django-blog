@@ -14,7 +14,7 @@ class CommentForm(MathCaptchaModelForm):
         exclude = ["post"]
 
 def paginate(request, posts):
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 10)
     try: page = int(request.GET.get("page", '1'))
     except ValueError: page = 1
     try:
