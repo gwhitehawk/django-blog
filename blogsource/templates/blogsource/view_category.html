@@ -5,15 +5,28 @@
     {% if posts %}
         {% for post in posts %}
             <div class = "content">
-            {{category.title}} -> <a href="{{post.get_absolute_url}}">{{post.title}}</a>
-            <br>{{post.posted}}
-            <br>{{post.body}}
-            {% for link in links|filterlinks:post %}
+            {{category.title}} -> <a href="{{post.post.get_absolute_url}}">{{post.post.title}}</a>
+            <br>{{post.post.posted}}
+            <br>{{post.post.body}}
+
+        <!-- images -->
+            {% for link in links|filterlinks:post.post %}
                 <br>
                 <div id="image_wrap">
                 <img src="{{link.link}}" height="532" />
                 </div>
             {% endfor %}
+
+        <!-- link to comments -->
+            {% if post.has_comments %}
+                {% if post.has_comments == 1 %}
+                    <br>
+                    <a href="{{post.post.get_absolute_url}}#comments">1 comment</a>
+                {% else %}
+                    <br>
+                    <a href="{{post.post.get_absolute_url}}#comments">{{post.has_comments}} comments</a>
+                {% endif %}
+            {% endif %}
 
             </div>
         {% endfor %}

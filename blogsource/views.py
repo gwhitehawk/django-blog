@@ -24,6 +24,15 @@ def paginate(request, posts):
     
     return posts_filtered
 
+def assign_comments(posts):
+    posts_comments = []
+
+    for post in posts:
+        comments = Comment.objects.filter(post=post)
+        posts_comments.append({'post': post, 'has_comments': len(comments)})
+    
+    return posts_comments
+
 def base(request):
     return render_to_response('blogsource/base.html', {
         'categories': Category.objects.all()
@@ -34,7 +43,7 @@ def index(request):
 
     return render_to_response('blogsource/index.html', {
         'categories': Category.objects.all(),
-        'posts': paginate(request, posts),
+        'posts': paginate(request, assign_comments(posts)),
         'links': Link.objects.all()
     })
 
@@ -51,8 +60,8 @@ def view_post(request, slug):
             comment.author = p["author"]
             comment.body = p["body"]
             comment.save()
-            return HttpResponseRedirect(reverse("blogsource.views.view_post", kwargs={'slug': slug}))
-
+            return HttpResponseRedirect(reverse("blogsource.views.view_post", kwargs={'slug': slug}) + "#comments")
+                
     d = {
         'categories': Category.objects.all(),
         'post': post,
@@ -63,15 +72,15 @@ def view_post(request, slug):
     }
     
     d.update(csrf(request))
-    return render_to_response('blogsource/view_post.html', d) 
+    return render_to_response('blogsource/view_post.html', d)
 
 def view_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts = Blog.objects.filter(category=category).order_by("-posted")
-    
+
     return render_to_response('blogsource/view_category.html', {
         'categories': Category.objects.all(),
         'category': category,
-        'posts': paginate(request, posts),
+        'posts': paginate(request, assign_comments(posts)),
         'links': Link.objects.filter(post=posts)
     })
