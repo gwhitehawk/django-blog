@@ -7,4 +7,4 @@ def filterlinks(all_links, post):
     for link in all_links:
         if (link.post == post):
             filtered.append(link)
-    return filtered        
+    return filtered 

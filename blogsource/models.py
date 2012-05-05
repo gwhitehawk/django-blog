@@ -14,7 +14,7 @@ class Blog(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('blogsource.views.view_post', None, { 'slug': self.slug })
+        return ('blogsource.views.view_post', None, {'slug': self.slug})
 
 class Category(models.Model):
     title = models.CharField(max_length=100, db_index=True)
