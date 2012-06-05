@@ -35,6 +35,7 @@
     <h1>Categories</h1>
         {% if categories %}            
             <ul id = "sidebarnav">
+                <li><a href="http://gwhitehawk.wonderland.cz">all articles</a></li>
             {% for category in categories %}
                 <li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
             {% endfor %}
