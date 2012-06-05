@@ -12,7 +12,16 @@
 <link rel="stylesheet "type="text/css "href="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/css/scrollable-buttons.css"/>
 <script type="text/javascript" src="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/js/jquery.tools.min.js"></script>
 <script type="text/javascript" src="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/js/gallery.js"></script>
-        <title>{% block head_title %}{% endblock %}</title>
+<title>{% block head_title %}{% endblock %}</title>
+
+<style>
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+</style>
 </head>
 
 <body style="background-image: url(http://artax.karlin.mff.cuni.cz/~sotam0am/texture37285662.jpg); background-repeat: ; background-color: #ffffff; ">
@@ -38,8 +47,9 @@
 {% block content %}
 
 {% endblock %}
+
 <div id = "footer">
-</div>
+<p class="alignleft"><a href="latest/rss"><img src = "http://artax.karlin.mff.cuni.cz/~sotam0am/img/feed-icon-14x14.png"></a></p><p class="alignright">Copyright &copy Miroslava Sotakova, 2012</p>
 </div>
 </body>
 </html>
