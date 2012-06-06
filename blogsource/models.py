@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import permalink
+from django.utils.safestring import mark_safe
 
 # Create your models here.
 class Blog(models.Model):
@@ -11,6 +12,9 @@ class Blog(models.Model):
 	
     def __unicode__(self):
         return '%s' % self.title
+    
+    def display_body(self):
+        return mark_safe(self.body)
 
     @permalink
     def get_absolute_url(self):

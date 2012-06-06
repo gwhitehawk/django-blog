@@ -7,7 +7,7 @@
 		    <div class = "content">
             <a href="{{post.post.get_absolute_url}}">{{post.post.title}}</a>
 		    <br>{{post.post.posted}}
-		    <br>{{post.post.body}}
+		    <br>{{post.post.display_body}}
 
         <!-- images -->   
             {% for link in links|filterlinks:post.post %}
