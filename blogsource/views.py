@@ -1,6 +1,8 @@
 # Create your views here.
 
 from blogsource.models import Blog, Category, Comment, Link
+from blogsource.feeds import LatestEntriesFeed
+
 from math_captcha.forms import MathCaptchaModelForm
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
@@ -82,5 +84,5 @@ def view_category(request, slug):
         'categories': Category.objects.all(),
         'category': category,
         'posts': paginate(request, assign_comments(posts)),
-        'links': Link.objects.filter(post=posts)
+        'links': Link.objects.all()
     })
