@@ -1,28 +1,41 @@
 {% extends 'blogsource/base.html' %}
+{% block head_title %}{{post.title}}{% endblock %}
+
+{% block fb_tags %}
+<meta property="og:title" content={{post.slug}} />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://gwhitehawk.wonderland.cz/view/{{post.slug}}.html" />
+<meta property="og:description" content="" />
+{% endblock %}
+
 {% block content %}
 
 <div class = "content"> 
 <h1>{{post.title}}</h1>
 {{post.posted}}<br>
 {{post.display_body}}
+<center>
 {% for link in links %}
     <br>
     <div id="image_wrap">
     <img src="{{link.link}}" height="532" />
     </div>
 {% endfor %}
+</center>
+
+<div class="fb-like" data-href="http://gwhitehawk.wonderland.cz/view/{{post.slug}}.html" data-send="true" data-width="450" data-show-faces="true"></div>
 
 <!-- Comments  -->
 {% if comments %}
     <p id="comments">Comments:</p>
-{% endif %}
 
-{% for comment in comments %}
-    <div class="comment">
-        <div class="time"><h2>{{ comment.created }} | {{ comment.author }}</h2></div>
-        <div class="body"><h2>{{ comment.body|linebreaks }}</h2></div>
-    </div>
-{% endfor %}
+    {% for comment in comments %}
+        <div class="comment">
+            <div class="time"><h2>{{ comment.created }} | {{ comment.author }}</h2></div>
+            <div class="body"><h2>{{ comment.body|linebreaks }}</h2></div>
+        </div>
+    {% endfor %}
+{% endif %}
 
 <div id="addc">Add a comment</div>
 <!-- Comment form  -->

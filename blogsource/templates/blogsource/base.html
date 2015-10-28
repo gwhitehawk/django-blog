@@ -2,19 +2,36 @@
 <html>
 
 <head>
-<meta name="MSSmartTagsPreventParsing" content="TRUE"/>
-<meta http-equiv="expires" content="-1"/>
-<meta http-equiv= "pragma" content="no-cache"/>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="description" content="about"/>
-<link rel="stylesheet" type="text/css" href="http://artax.karlin.mff.cuni.cz/~sotam0am/css/photoblog.css"/>
-<link rel="stylesheet" type="text/css" href="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/css/scrollable-horizontal.css"/>
-<link rel="stylesheet "type="text/css "href="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/css/scrollable-buttons.css"/>
-<script type="text/javascript" src="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/js/jquery.tools.min.js"></script>
-<script type="text/javascript" src="http://artax.karlin.mff.cuni.cz/~sotam0am/Stanko/js/gallery.js"></script>
+<title>{% block head_title %}Mirka's Blog{% endblock %}</title>
+<meta name="author" content="Miroslava Sotakova"/>
+<meta charset="UTF-8">
+
+<!-- for Facebook -->
+{% block fb_tags %}
+<meta property="og:title" content="Mirka's Blog" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="" />
+<meta property="og:url" content="http://gwhitehawk.wonderland.cz/" />
+<meta property="og:description" content="I'm Mirka and I live in Brooklyn with my husband Michal, and two cute munchkins Stanko and Karin." />
+{% endblock %}
+
+<link rel="stylesheet" type="text/css" href="/css/blog_style.css"/>
+<link rel="stylesheet" type="text/css" href="/css/scrollable-horizontal.css"/>
+<link rel="stylesheet "type="text/css" href="/css/scrollable-buttons.css"/>
+<script type="text/javascript" src="/js/jquery.tools.min.js"></script>
+<script type="text/javascript" src="/js/gallery.js"></script>
 <link rel="alternate" type="application/atom+xml" title="Atom Feed for gwhitehawk.wonderland.cz" href="latest/feed" />
 
-<title>{% block head_title %}{% endblock %}</title>
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 
 <style>
 .alignleft {
@@ -24,20 +41,27 @@
     float: right;
 }
 </style>
+
 </head>
 
 <body style="background-image: url(http://artax.karlin.mff.cuni.cz/~sotam0am/texture37285662.jpg); background-repeat: ; background-color: #ffffff; ">
+
 <div id = "container">
-    <div id = "header">
-    </div>
-    
-    <div id = "sidebar">
+
+<div class="fb-like" data-href="http://gwhitehawk.wonderland.cz" data-send="true" data-width="450" data-show-faces="true" data-font="arial"></div><br>
+
+<div id = "header">
+</div>
+
+<div id = "sidebar">
     <h1>About</h1>
-    This is my photoblog.
+    I'm <a href="http://artax.karlin.mff.cuni.cz/~sotam0am/">Mirka</a> and I live in Brooklyn with my husband Michal, and two cute munchkins Stanko and Karin. I studied mathematics in Prague, wrote a <a href="http://artax.karlin.mff.cuni.cz/~sotam0am/thesis_mirka.pdf">thesis</a> on quantum cryptography in Aarhus, Denmark, and somehow ended up a software engineer in <a href="http://www.knewton.com">Knewton</a>.
+    This site originally started both as an experimental way to learn python django framework, and a photo blog featuring photos cherry-picked from my <a href="http://flickr.com/gwhitehawk">flickr</a>, which is mostly family snapshots these days. What will become of it is up to my arbitrary whims.
+
     <h1>Categories</h1>
-        {% if categories %}            
+        {% if categories %}
             <ul id = "sidebarnav">
-                <li><a href="http://gwhitehawk.wonderland.cz">all articles</a></li>
+            <li><a href="http://gwhitehawk.wonderland.cz">all articles</a></li>
             {% for category in categories %}
                 <li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
             {% endfor %}
@@ -45,14 +69,16 @@
         {% else %}
             <p>There are no posts.</p>
         {% endif %}
-    </div>
+</div>
 
 {% block content %}
-
 {% endblock %}
 
 <div id = "footer">
-<p class="alignleft"><a href="latest/feed"><img src = "http://artax.karlin.mff.cuni.cz/~sotam0am/img/feed-icon-14x14.png"></a></p><p class="alignright">Copyright &copy Miroslava Sotakova, 2012</p>
+<p class="alignleft"><a href="latest/feed"><img src = "http://artax.karlin.mff.cuni.cz/~sotam0am/img/feed-icon-14x14.png"></a></p>
+<p class="alignright">Copyright &copy Miroslava Sotakova, 2012</p>
+</div>
+
 </div>
 </body>
 </html>
